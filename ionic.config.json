@@ -1,0 +1,7 @@
+{
+  "name": "finhome",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
