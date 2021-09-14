@@ -21,7 +21,7 @@
           />
         </ion-col>
         <ion-col col-2>
-          <ion-card-subtitle style="color: white">Boa noite</ion-card-subtitle>
+          <ion-card-subtitle style="color: white">{{ saudacao }}</ion-card-subtitle>
           <ion-card-title style="color: white">Carlos!</ion-card-title>
         </ion-col>
         <ion-col col-2>
@@ -30,7 +30,7 @@
               <ion-icon
                 slot="icon-only"
                 color="light"
-                name="notifications"
+                name="cog"
               ></ion-icon>
             </ion-button>
           </div>
@@ -64,7 +64,9 @@
           <ion-text style="color: black">
             <h2 style="margin-top: 20px; font-weight: bolder">Minhas contas</h2>
             <br />
+            <p style="text-align: center;">Informe um banco, investimento ou outra forma de movimentação de dinheiro.</p>
           </ion-text>
+
           <ion-button
             clear
             color="light"
