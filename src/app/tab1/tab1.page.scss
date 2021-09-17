@@ -1,5 +1,25 @@
-h1{
-  font-weight: bold;
+.branco{
+  color: white;
+}
+
+.card-padrao{
+  padding-top: 10px;
+  margin-left: 10px;
+  padding-right: 10px;
+  margin-top: 20px;
+}
+
+.direita-12
+{
+  margin-right: 12px;
+}
+
+.divider{
+  margin-top: 10px;
+  border: 1px solid;
+  color: #d4d4d4;
+  height: 1px;
+  width: 100%;
 }
 
 .esquerda-10
@@ -11,22 +31,38 @@ h1{
   margin-left: 15px;
 }
 
-.branco{
-  color: white;
+.icon-grande
+{
+  height: 40px;
+  width: 40px;
+}
+
+ion-slides {
+  height: 100%;
+}
+
+h1{
+  font-weight: bold;
+}
+
+.negrito
+{
+  font-weight: bold;
+}
+
+.preto{
+  color: black;
 }
 
 .top-10{
   margin-top: 10px;
 }
 
-.direita-12
-{
-  margin-right: 12px;
+.top-15{
+  margin-top: 15px;
 }
 
-.card-padrao{
-  padding-top: 10px;
-  margin-left: 10px;
-  padding-right: 10px;
-  margin-top: 20px;
-}
+
+
+
+
