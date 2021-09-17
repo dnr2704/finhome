@@ -10,23 +10,32 @@ import { stringify } from 'querystring';
 })
 export class Tab1Page {
 
-  saudacao: string;
+  isItemDisponivel = false;
+  itens = [];
+  icones = [];
 
-   slideOpts: any = {
-    initialSlide: 0,
-    speed: 400
-   };
 
   constructor() {}
 
-
-  ngOnInit() {
-    let hora = new Date().getHours();
-    this.saudacao = ((hora >= 1) && (hora <= 12)) ? 'Bom dia' : ((hora >= 13) && (hora <= 18)) ? 'Boa tarde' : 'Boa noite';
+  initializeItems(){
+    this.itens = ['Meu Perfil','Receitas e Despesas', 'Cartões de Crédito', 'Minhas Contas','Limites de Gastos', 'Despesas Fixas'];
+    this.icones = ['person','bag', 'card','wallet-outline','warning','cash'];
   }
 
+  ngOnInit() {
+    this.initializeItems();
+  }
 
-
-
+  buscaMenu(ev: any) {
+    this.initializeItems();
+    const val = ev.target.value;
+    if (val && val.trim() !== '')
+    {
+        // this.isItemAvailable = true;
+        this.itens = this.itens.filter((item) => (item.toLowerCase().indexOf(val.toLowerCase()) > -1));
+          } else {
+        this.isItemDisponivel = false;
+    }
+  }
 
 }
