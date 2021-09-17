@@ -13,6 +13,7 @@ export class Tab1Page {
   isItemDisponivel = false;
   itens = [];
   icones = [];
+  links = [];
 
 
   constructor() {}
@@ -20,6 +21,7 @@ export class Tab1Page {
   initializeItems(){
     this.itens = ['Meu Perfil','Receitas e Despesas', 'Cartões de Crédito', 'Minhas Contas','Limites de Gastos', 'Despesas Fixas'];
     this.icones = ['person','bag', 'card','wallet-outline','warning','cash'];
+    this.links = ['perfil','categorias', 'cartoes','contas','limites','despesas'];
   }
 
   ngOnInit() {

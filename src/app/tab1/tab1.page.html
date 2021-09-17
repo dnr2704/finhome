@@ -33,7 +33,7 @@
 
   <ion-searchbar type="text" placeholder="Buscar" (ionChange)="buscaMenu($event)"></ion-searchbar>
   <ion-list>
-      <ion-item href="http://www.google.com" *ngFor="let item of itens; let i = index">
+      <ion-item [routerLink]="['/' + links[i]]" *ngFor="let item of itens; let i = index">
         <ion-icon style="padding-right: 10px; color: #3c79e0;" name={{icones[i]}} > </ion-icon>
         {{item }}  </ion-item>
   </ion-list>
