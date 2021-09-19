@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div style="text-align: center">
+    <img style="height: 150px; width: 150px" src="\assets\logo.jpg" />
+  </div>
+
+  <!-- <form #form="ngForm" (ngSubmit)="login(form)" method="post"> -->
+    <form (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="floating">E-mail</ion-label>
+      <ion-input id="email" type="email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Senha</ion-label>
+      <ion-input id="senha" type="password"></ion-input>
+    </ion-item>
+    <br />
+    <ion-button
+      style="text-transform: none"
+      class="padding20"
+      type="submit"
+      expand="full"
+      color="primary"
+      >ENTRAR</ion-button
+    >
+  </form>
+
+  <div style="width: 100%; text-align: right; padding-right: 25px">
+    <br />
+    <a [routerLink]="['/' + 'perfil']" style="padding-left: 25px"
+      >Esqueci minha senha</a
+    >
+  </div>
+
+  <!-- <p style="padding-left:20px" text-right>Criar uma conta</p> -->
+  <br />
+  <ion-button
+    [routerLink]="['/' + 'cadastro']"
+    style="text-transform: none"
+    class="padding20"
+    expand="full"
+    color="danger"
+
+    >CADASTRAR</ion-button
+  >
+</ion-content>
