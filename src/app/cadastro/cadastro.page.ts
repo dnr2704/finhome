@@ -1,4 +1,6 @@
-import { Usuario } from './../models/usuario';
+/* eslint-disable curly */
+/* eslint-disable no-var */
+/* eslint-disable max-len */
 import { StorageService } from './../servicos/storage.service';
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import { map, take } from 'rxjs/operators';
@@ -34,16 +36,18 @@ export class CadastroPage implements OnInit {
   }
 
   validaCadastro() {
-    if (this.validacao.verificaObrigatorio() === true) {
-      let confirmacao = (document.getElementById('confirmacao') as HTMLInputElement).value;
-      let senha = (document.getElementById('senha') as HTMLInputElement).value;
-
+    if (this.validacao.verificaObrigatorio() === true)
+    {
+      var senha1 = (document.getElementById('senha1') as HTMLInputElement).value;
+      var senha2 = (document.getElementById('senha2') as HTMLInputElement).value;
       // eslint-disable-next-line eqeqeq
-      if (confirmacao != senha) {
-        this.toast.showToast('A confirmação é diferente da senha informada.', 2000);
+      if (senha1 != senha2)
+      {
+        this.toast.showToast('A senha de confirmação é diferente da senha informada.', 2000);
       }
-      else {
-        let email = (document.getElementById('email') as HTMLInputElement).value.toLowerCase().trim();
+      else
+      {
+        let email = (document.getElementById('email') as HTMLInputElement).value;
         this.validacao.existeUsuario(email).subscribe(dados => {
           // eslint-disable-next-line eqeqeq
           if (dados.length == 0) {
@@ -52,20 +56,31 @@ export class CadastroPage implements OnInit {
               imagem: '',
               datanascimento: '',
               email: (document.getElementById('email') as HTMLInputElement).value.toLowerCase().trim(),
-              senha: (document.getElementById('senha') as HTMLInputElement).value,
+              senha: (document.getElementById('senha1') as HTMLInputElement).value,
               nome: (document.getElementById('nome') as HTMLInputElement).value,
               sobrenome: (document.getElementById('sobrenome') as HTMLInputElement).value
             }));
-            try {
-              this.storage.set('email', email);
-              this.rota.navigateByUrl('/tabs/tab2');
-            }
-            catch (error) {
-              this.toast.showToast('Não foi possível realizar seu cadastro. Tente mais tarde.', 3000);
-            }
+            this.http.post<Usuario[]>(environment.api + '/' + 'InsereUsuario/', jsonNovoUsuario).subscribe();
+            // verificar se o cadastro foi realizado
+            this.storage.set('email', email);
+            this.rota.navigateByUrl('/tabs/tab2');
+
+            // this.http.post<Usuario[]>(environment.api + '/' + 'InsereUsuario/', jsonNovoUsuario).subscribe(
+            //   (response) => {
+            //     alert(response[0].id);
+            //   },
+            //   (error) => {//error() callback
+            //     //alert('Request failed with error');
+            //     this.storage.set('email', email);
+            //     this.rota.navigateByUrl('/tabs/tab2');
+            //   },
+            //   () => { //complete() callback
+            //   });
+
+
           }
           else {
-            this.toast.showToast('Já existe um cadastro para o e-mail ' + '"' + email.toLowerCase() + '"' + '.', 3000);
+            this.toast.showToast('Já existe um cadastro para o e-mail ' + '"' + (document.getElementById('email') as HTMLInputElement).value + '"' + '.', 3000);
           }
         });
       }

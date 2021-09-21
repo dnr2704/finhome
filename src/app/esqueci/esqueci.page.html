@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Nova senha</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div style="text-align: center">
+    <img style="height: 150px; width: 150px" src="\assets\logo.jpg" />
+  </div>
+  <form method="POST">
+    <ion-item lines="full">
+      <p>Informe seu endereço de e-mail para receber a sua nova senha.</p>
+      <ion-label position="floating">E-mail</ion-label>
+      <ion-input id="email" style="text-transform: lowercase" name="E-mail" type="text" required></ion-input>
+    </ion-item>
+
+    <br>
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" (click)="enviaSenha()" color="primary" expand="block">Enviar</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

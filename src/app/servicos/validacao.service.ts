@@ -61,5 +61,3 @@ export class ValidacaoService {
     return this.http.get<Usuario[]>(environment.api + '/' + 'ExisteUsuario/' + `${email}/${senha}`);
   }
 }
-
-

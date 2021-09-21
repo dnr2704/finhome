@@ -13,7 +13,7 @@
     <form (ngSubmit)="onSubmit()">
     <ion-item>
       <ion-label position="floating">E-mail</ion-label>
-      <ion-input id="email" type="email"></ion-input>
+      <ion-input style="text-transform: lowercase" id="email" type="email"></ion-input>
     </ion-item>
 
     <ion-item>
@@ -33,7 +33,7 @@
 
   <div style="width: 100%; text-align: right; padding-right: 25px">
     <br />
-    <a [routerLink]="['/' + 'perfil']" style="padding-left: 25px"
+    <a [routerLink]="['/' + 'esqueci']" style="padding-left: 25px"
       >Esqueci minha senha</a
     >
   </div>

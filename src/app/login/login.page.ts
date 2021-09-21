@@ -69,20 +69,10 @@ export class LoginPage implements OnInit {
         this.msgErro = '';
         try {
           this.validacao.validaAcessoUsuario(this.email, this.senha).subscribe(dados => {
-            if (dados.length != -1) // mudar para diferente de zero
+            if (dados.length != 0) // mudar para diferente de zero
             {
               this.rota.navigateByUrl('/tabs/tab2');
             }
-            // if ((this.email.trim() == 'dnr2704@gmail.com') || (this.senha.trim() == '1'))
-            // {
-            //     // localStorage.setItem('auth_token', email);
-            //     // this.util.autenticado = true;
-            //     // this.util.tipo = this.util.GetValorJson(Usuario,'tipo');
-            //     this.rota.navigateByUrl('/tabs/tab2');
-            //     //dados[0].
-
-            //     //this.toast.showToast('ok.',2000);
-            // }
             else {
               this.toast.showToast('Usuário não encontrado.',2000);
             }
