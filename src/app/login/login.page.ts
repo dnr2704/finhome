@@ -1,3 +1,4 @@
+import { Tab1Page } from './../tab1/tab1.page';
 /* eslint-disable eqeqeq */
 import { ToastService } from './../servicos/toast.service';
 /* eslint-disable @typescript-eslint/naming-convention */
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Usuario } from '../models/usuario';
+import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -34,7 +36,13 @@ export class LoginPage implements OnInit {
   //   admin: null
   // };
 
-  constructor(private http: HttpClient, private validacao: ValidacaoService, private util: UtilService, private toast: ToastService) { }
+  // eslint-disable-next-line max-len
+  constructor(
+    private http: HttpClient,
+    private validacao: ValidacaoService,
+    private util: UtilService,
+    private toast: ToastService,
+    private rota: Router) { }
 
   ngOnInit() {
 
@@ -61,16 +69,20 @@ export class LoginPage implements OnInit {
         this.msgErro = '';
         try {
           this.validacao.validaAcessoUsuario(this.email, this.senha).subscribe(dados => {
-            if (dados.length > 0)
+            if (dados.length != -1) // mudar para diferente de zero
             {
-                // localStorage.setItem('auth_token', email);
-                // this.util.autenticado = true;
-                // this.util.tipo = this.util.GetValorJson(Usuario,'tipo');
-                //this.rotaIndex.navigate(["/index"]);
-                //dados[0].
-                this.toast.showToast(dados.length.toString(),2000);
-                //this.toast.showToast('ok.',2000);
+              this.rota.navigateByUrl('/tabs/tab2');
             }
+            // if ((this.email.trim() == 'dnr2704@gmail.com') || (this.senha.trim() == '1'))
+            // {
+            //     // localStorage.setItem('auth_token', email);
+            //     // this.util.autenticado = true;
+            //     // this.util.tipo = this.util.GetValorJson(Usuario,'tipo');
+            //     this.rota.navigateByUrl('/tabs/tab2');
+            //     //dados[0].
+
+            //     //this.toast.showToast('ok.',2000);
+            // }
             else {
               this.toast.showToast('Usuário não encontrado.',2000);
             }
