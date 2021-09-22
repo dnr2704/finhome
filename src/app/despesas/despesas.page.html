@@ -13,9 +13,17 @@
   </div>
   <ion-searchbar type="text" placeholder="Buscar" (ionChange)="busca($event)"></ion-searchbar>
   <ion-list *ngIf="itens.length >= 0" >
-      <ion-item [routerLink]="['/' + 'despesas' + i]" *ngFor="let item of itens; let i = index">
-
-        {{item }}  </ion-item>
+    <div *ngIf="carregou" >
+      <ion-item [routerLink]="['/' + 'despesas/' + item.id]" *ngFor="let item of itens; let i = index">
+        {{item.descricao}}  </ion-item>
+    </div>
+    <div *ngIf="!carregou" >
+      <ion-item [routerLink]="['/' + 'despesas/' + itensId[i]]" *ngFor="let item of itens; let i = index">
+        {{item}} </ion-item>
+    </div>
   </ion-list>
-  <p *ngIf="itens.length < 1" style="padding-left: 10px; padding-right: 10px;">Nenhuma despesa fixa cadastrada.</p>
+  <div *ngIf="carregou" >
+    <p *ngIf="itens.length < 1" style="padding-left: 10px; padding-right: 10px;">Nenhuma despesa fixa cadastrada.</p>
+  </div>
+
 </ion-content>

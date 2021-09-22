@@ -18,18 +18,18 @@ export class Tab1Page {
 
   constructor() {}
 
-  initializeItems(){
+  carregarItems(){
     this.itens = ['Meu Perfil','Receitas e Despesas', 'Cartões de Crédito', 'Minhas Contas','Limites de Gastos', 'Despesas Fixas'];
     this.icones = ['person','bag', 'card','wallet-outline','warning','cash'];
     this.links = ['perfil','categorias', 'cartoes','contas','limites','despesas'];
   }
 
   ngOnInit() {
-    this.initializeItems();
+    this.carregarItems();
   }
 
   buscaMenu(ev: any) {
-    this.initializeItems();
+    this.carregarItems();
     const val = ev.target.value;
     if (val && val.trim() !== '')
     {
