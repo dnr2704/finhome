@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Despesas Fixas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div style="text-align: center">
+    <ion-icon  style="height: 90px; width: 90px; margin-top: 20px; color: #d4d4d4;" name="cash"></ion-icon>
+  </div>
+  <ion-searchbar type="text" placeholder="Buscar" (ionChange)="busca($event)"></ion-searchbar>
+  <ion-list *ngIf="itens.length >= 0" >
+      <ion-item [routerLink]="['/' + 'despesas' + i]" *ngFor="let item of itens; let i = index">
+
+        {{item }}  </ion-item>
+  </ion-list>
+  <p *ngIf="itens.length < 1" style="padding-left: 10px; padding-right: 10px;">Nenhuma despesa fixa cadastrada.</p>
+</ion-content>

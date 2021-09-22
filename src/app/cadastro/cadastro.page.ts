@@ -49,8 +49,11 @@ export class CadastroPage implements OnInit {
       {
         let email = (document.getElementById('email') as HTMLInputElement).value;
         this.validacao.existeUsuario(email).subscribe(dados => {
+          alert('1');
           // eslint-disable-next-line eqeqeq
           if (dados.length == 0) {
+            this.storage.clear();
+            this.storage.set('email', email);
             let jsonNovoUsuario = JSON.parse(JSON.stringify({
               admin: 'N',
               imagem: '',
@@ -62,7 +65,7 @@ export class CadastroPage implements OnInit {
             }));
             this.http.post<Usuario[]>(environment.api + '/' + 'InsereUsuario/', jsonNovoUsuario).subscribe();
             // verificar se o cadastro foi realizado
-            this.storage.set('email', email);
+
             this.rota.navigateByUrl('/tabs/tab2');
 
             // this.http.post<Usuario[]>(environment.api + '/' + 'InsereUsuario/', jsonNovoUsuario).subscribe(

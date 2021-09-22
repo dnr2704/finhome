@@ -42,18 +42,16 @@ export class Tab2Page {
         this.usuario = response[0].nome;
       },
       (error) => {//error() callback
-        console.error('Request failed with error');
+        alert('Request failed with error');
 
       },
-      () => { //complete() callback
-
+      () => (response) => {
+        this.usuario = response[0].nome;
       });
-    if ((emailUsuario == null) || (emailUsuario == ''))
-    {
+    if ((emailUsuario == null) || (emailUsuario == '')) {
       this.rota.navigateByUrl('/login');
     }
-    else
-    {
+    else {
       this.saudacao = ((hora >= 1) && (hora <= 12)) ? 'Bom dia' : ((hora >= 13) && (hora <= 18)) ? 'Boa tarde' : 'Boa noite';
     }
   }
