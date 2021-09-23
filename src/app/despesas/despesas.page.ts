@@ -19,62 +19,35 @@ import 'rxjs/add/operator/map';
 })
 export class DespesasPage implements OnInit {
 
-  isItemDisponivel = false;
-  carregou = false;
   itens = [];
-  itensId = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+
+   }
 
 
-  carregarItems() {
-    this.http.get(environment.api + '/' + 'ListaDespesa/')
+  carregarItems(tipo,parametro) {
+    this.http.get(environment.api + '/' + 'ListaDespesa/' + tipo + '/' + parametro)
       .subscribe(data => {
         this.itens = JSON.parse(JSON.stringify(data));
       });
-
   }
 
   ngOnInit() {
-    this.carregou = true;
-    this.carregarItems();
+    this.carregarItems('a','0');
   }
 
   busca(ev: any) {
-    this.itens = [];
-    this.itensId = [];
-    this.carregou = false;
-    this.http.get(environment.api + '/' + 'ListaDespesa/')
-      .subscribe(data => {
-        const val = ev.target.value;
-        if (val && val.trim() !== '') {
-          this.isItemDisponivel = true;
-          const json = JSON.stringify(data);
-          var x = json.split('}');
-          var descricoes = '';
-          var ids = '';
-          for (var i = 0; i < x.length; i++) {
-            var sliceDescricao = x[i].slice(0, x[i].indexOf('descricao') + 12);
-            var tempDescricao = x[i].replace(sliceDescricao, '');
-            var descricao = tempDescricao.substr(0, tempDescricao.indexOf('"'));
-            if (descricao.toLowerCase().indexOf(val.toLowerCase()) !== -1) {
-              // descricoes += '\'' + descricao + '\'' + ',';
-              descricoes += descricao + ',';
-              var id = x[i].slice(7, x[i].indexOf('id') + 5);
-              ids += id + ',';
-            }
-          }
-          if (descricoes.length > 0) {
-            descricoes = descricoes.substring(0, descricoes.length - 1);
-            this.itens = descricoes.split(',');
-            this.itensId = ids.split(',');
+    const parametro = ev.target.value;
+    if (parametro && parametro.trim() !== '') {
+      this.carregarItems('descricao', parametro);
+    }
+    else {
+      this.carregarItems('a','0');
+    }
+  }
 
-            alert(this.itensId);
-          }
-        } else {
-          this.carregou = true;
-          this.carregarItems();
-        }
-      });
+  novoCadastro(){
+
   }
 }

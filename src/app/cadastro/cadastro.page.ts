@@ -49,7 +49,6 @@ export class CadastroPage implements OnInit {
       {
         let email = (document.getElementById('email') as HTMLInputElement).value;
         this.validacao.existeUsuario(email).subscribe(dados => {
-          alert('1');
           // eslint-disable-next-line eqeqeq
           if (dados.length == 0) {
             this.storage.clear();
@@ -67,7 +66,7 @@ export class CadastroPage implements OnInit {
             // verificar se o cadastro foi realizado
 
             this.rota.navigateByUrl('/tabs/tab2');
-
+            this.storage.set('email', email);
             // this.http.post<Usuario[]>(environment.api + '/' + 'InsereUsuario/', jsonNovoUsuario).subscribe(
             //   (response) => {
             //     alert(response[0].id);

@@ -3,6 +3,11 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/despesa/0']">
+        <ion-icon name="add-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-title>Despesas Fixas</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -12,18 +17,27 @@
     <ion-icon  style="height: 90px; width: 90px; margin-top: 20px; color: #d4d4d4;" name="cash"></ion-icon>
   </div>
   <ion-searchbar type="text" placeholder="Buscar" (ionChange)="busca($event)"></ion-searchbar>
-  <ion-list *ngIf="itens.length >= 0" >
-    <div *ngIf="carregou" >
-      <ion-item [routerLink]="['/' + 'despesas/' + item.id]" *ngFor="let item of itens; let i = index">
-        {{item.descricao}}  </ion-item>
-    </div>
-    <div *ngIf="!carregou" >
-      <ion-item [routerLink]="['/' + 'despesas/' + itensId[i]]" *ngFor="let item of itens; let i = index">
-        {{item}} </ion-item>
-    </div>
-  </ion-list>
-  <div *ngIf="carregou" >
-    <p *ngIf="itens.length < 1" style="padding-left: 10px; padding-right: 10px;">Nenhuma despesa fixa cadastrada.</p>
+
+  <div *ngIf="itens.length >= 0">
+    <ion-list *ngFor="let item of itens; let i = index">
+      <ion-item-sliding>
+        <ion-item [routerLink]="['/' + 'despesa/' + item.id]">
+          <ion-label>
+            <h2>{{item.descricao}}</h2>
+            <h3> Valor: {{item.valor | currency:'BRL':true:'1.2-2' }} </h3>
+            <h3> Data de Início: {{item.datainicio | date:'dd/MM/yyyy' }} </h3>
+            <!-- <h3> Data de Termino: {{item.datafim ?? '00/00/0000' | date:'dd/MM/yyyy' }}</h3> -->
+          </ion-label>
+        </ion-item>
+
+        <ion-item-options side="end">
+          <ion-item-option style="text-transform: none" color="danger">Excluir</ion-item-option>
+        </ion-item-options>
+
+      </ion-item-sliding>
+    </ion-list>
   </div>
+
+  <p *ngIf="((itens.length < 1))" style="padding-left: 10px; padding-right: 10px;">Nenhuma despesa fixa cadastrada.</p>
 
 </ion-content>

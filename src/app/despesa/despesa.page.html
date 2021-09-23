@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Despesa</ion-title>
+    <!-- <ion-buttons slot="end">
+      <ion-button [routerLink]="['/despesa/0']">
+        <ion-icon name="add-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div style="text-align: center">
+    <img style="height: 150px; width: 150px" src="\assets\logo.jpg" />
+  </div>
+  <form method="POST">
+    <ion-item lines="full">
+      <ion-label position="floating">Código</ion-label>
+      <ion-input id="codigo" name="Código" type="text" required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Descrição</ion-label>
+      <ion-input id="descricao" name="Descrição" type="text" required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Valor</ion-label>
+      <ion-input id="valor" name="Valor" type="text" required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Data de Início</ion-label>
+      <ion-input id="datainicio" name="Data de Início" required type="date"> </ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Data de Término</ion-label>
+      <ion-input id="datafim" type="date"> </ion-input>
+    </ion-item>
+
+    <!-- <ion-item lines="full">
+      <ion-label position="floating">Confirme a senha</ion-label>
+      <ion-select value="dog">
+        <ion-select-option value="cat">Cat</ion-select-option>
+        <ion-select-option value="dog">Dog</ion-select-option>
+      </ion-select>
+    </ion-item> -->
+    <br />
+    <ion-row>
+      <ion-col>
+        <ion-button
+          type="submit"
+          (click)="salvar()"
+          color="primary"
+          expand="block"
+          >Salvar</ion-button
+        >
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>
