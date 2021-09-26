@@ -10,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
+import { AlertaService } from '../servicos/alerta.service';
 
 
 @Component({
@@ -21,12 +22,14 @@ export class DespesasPage implements OnInit {
 
   itens = [];
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private alerta: AlertaService
+  ) {
 
-   }
+  }
 
-
-  carregarItems(tipo,parametro) {
+  carregarItems(tipo, parametro) {
     this.http.get(environment.api + '/' + 'ListaDespesa/' + tipo + '/' + parametro)
       .subscribe(data => {
         this.itens = JSON.parse(JSON.stringify(data));
@@ -34,7 +37,7 @@ export class DespesasPage implements OnInit {
   }
 
   ngOnInit() {
-    this.carregarItems('a','0');
+    this.carregarItems('a', '0');
   }
 
   busca(ev: any) {
@@ -43,11 +46,19 @@ export class DespesasPage implements OnInit {
       this.carregarItems('descricao', parametro);
     }
     else {
-      this.carregarItems('a','0');
+      this.carregarItems('a', '0');
     }
   }
 
-  novoCadastro(){
-
+  excluiDespesa(id) {
+    this.alerta.confirmacao('Confirmação', 'Confirma a exclusão dessa despesa?', 'Cancelar', 'OK').then((res) => {
+      if (res === 'ok') {
+        this.http.get(environment.api + '/' + 'ExcluiDespesa/' + id).subscribe(dados => {
+          this.carregarItems('a', '0');
+        });
+        (document.getElementById('searchbar') as HTMLInputElement).value = 'x';
+        (document.getElementById('searchbar') as HTMLInputElement).value = '';
+      }
+    });
   }
 }

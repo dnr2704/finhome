@@ -13,28 +13,48 @@
 </ion-header>
 
 <ion-content padding>
-  <div style="text-align: center">
-    <img style="height: 150px; width: 150px" src="\assets\logo.jpg" />
-  </div>
-  <form method="POST">
+  <form [formGroup]="formulario" method="POST">
+    <div style="text-align: center">
+      <img style="height: 150px; width: 150px" src="\assets\logo.jpg" />
+    </div>
     <ion-item lines="full">
       <ion-label position="floating">Código</ion-label>
-      <ion-input id="codigo" name="Código" type="text" required></ion-input>
+      <ion-input
+        style="text-transform: uppercase"
+        maxlength="3"
+        id="codigo"
+        type="text"
+        required
+      ></ion-input>
     </ion-item>
+
 
     <ion-item lines="full">
       <ion-label position="floating">Descrição</ion-label>
-      <ion-input id="descricao" name="Descrição" type="text" required></ion-input>
+      <ion-input
+        id="descricao"
+        name="Descrição"
+        maxlength="20"
+        type="text"
+        required
+      ></ion-input>
     </ion-item>
 
     <ion-item lines="full">
       <ion-label position="floating">Valor</ion-label>
-      <ion-input id="valor" name="Valor" type="text" required></ion-input>
+      <ion-input
+        id="valor"
+        name="Valor"
+        maxlength="5"
+        type="number"
+        required
+      ></ion-input>
     </ion-item>
 
     <ion-item lines="full">
       <ion-label position="floating">Data de Início</ion-label>
-      <ion-input id="datainicio" name="Data de Início" required type="date"> </ion-input>
+      <ion-input  id="datainicio" name="Data de Início" required type="date">
+      </ion-input>
     </ion-item>
 
     <ion-item lines="full">

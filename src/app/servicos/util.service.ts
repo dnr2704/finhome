@@ -43,6 +43,14 @@ export class UtilService {
     }
     return valorChave;
   }
+
+  limpaInput() {
+    let elementos = document.getElementsByTagName('input');
+    for (let i = 0, max = elementos.length; i < max; i++) {
+      elementos[i].value = '';
+    }
+  }
+
   setValorInput(input, valor) {
     (document.getElementById(input) as HTMLInputElement).value = valor;
   }

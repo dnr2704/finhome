@@ -1,3 +1,8 @@
+import { NgxMaskModule } from 'ngx-mask';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+/* eslint-disable no-trailing-spaces */
+/* eslint-disable prefer-arrow/prefer-arrow-functions */
+/* eslint-disable no-var */
 /* eslint-disable max-len */
 import { Usuario } from './../models/usuario';
 /* eslint-disable prefer-const */
@@ -9,8 +14,12 @@ import { environment } from 'src/environments/environment';
 import { Despesa } from './../models/despesa';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { StorageService } from '../servicos/storage.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MaskPipe } from 'ngx-mask';
+
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-despesa',
@@ -19,18 +28,28 @@ import { StorageService } from '../servicos/storage.service';
 })
 export class DespesaPage implements OnInit {
 
+
   id: any;
-  descricao: any;
+  formulario: FormGroup;
+
   constructor(
     private rota: Router,
     private http: HttpClient,
     private validacao: ValidacaoService,
     private toast: ToastService,
     private store: StorageService,
-    private util: UtilService) { }
+    private fb: FormBuilder,
+    private util: UtilService) {
+
+  }
 
   ngOnInit() {
+    this.formulario = this.fb.group({
+      codigo: [null, [Validators.required, Validators.minLength(1), Validators.maxLength(3)]]
+    });
+
     this.id = this.rota.url.replace('/despesa/', '');
+    this.util.limpaInput();
     this.http.get<Despesa[]>(environment.api + '/' + 'ListaDespesa/id/' + this.id).subscribe(dados => {
       this.util.setValorInput('codigo', dados[0].codigo);
       this.util.setValorInput('descricao', dados[0].descricao);
@@ -39,6 +58,14 @@ export class DespesaPage implements OnInit {
       this.util.setValorInput('datafim', this.util.ajustaData(dados[0].datafim, 'yyyy-mm-dd'));
     });
   }
+
+  onChange($event){
+    console.log($event.target.value);
+    }
+
+  onSubmit(form) {
+    console.log(form);
+  };
 
   salvar() {
     let validou = false;
@@ -65,7 +92,7 @@ export class DespesaPage implements OnInit {
         let dataTermino = (document.getElementById('datafim') as HTMLInputElement).value;
         dataTermino = dataTermino == '' ? '1899-01-01' : this.util.ajustaData((document.getElementById('datafim') as HTMLInputElement).value, 'yyyy-mm-dd');
         let email = this.store.get('email');
-        this.http.get<Usuario[]>(environment.api  + '/' + 'ExisteUsuario/' + email + '/0').subscribe(dados => {
+        this.http.get<Usuario[]>(environment.api + '/' + 'ExisteUsuario/' + email + '/0').subscribe(dados => {
           let jsonDados = JSON.parse(JSON.stringify({
             id: this.id,
             codigo: (document.getElementById('codigo') as HTMLInputElement).value,
@@ -76,8 +103,10 @@ export class DespesaPage implements OnInit {
             idusu: dados[0].id
           }));
           this.http.post<Despesa[]>(environment.api + '/' + 'SalvaDespesa/', jsonDados).subscribe();
-          this.toast.showToast(this.id == 0 ? 'Dados cadastrados com sucesso.' : 'Dados atualizados com sucesso.',3000);
+          this.toast.showToast(this.id == 0 ? 'Dados cadastrados com sucesso.' : 'Dados atualizados com sucesso.', 3000);
           this.rota.navigateByUrl('/despesas');
+          (document.getElementById('searchbar') as HTMLInputElement).value = 'x';
+          (document.getElementById('searchbar') as HTMLInputElement).value = '';
         });
       }
     }
