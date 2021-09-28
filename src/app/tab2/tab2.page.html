@@ -15,7 +15,7 @@
     <ion-row>
       <ion-col col-2>
         <div style="padding-left: 10px">
-          <h1 class="branco">{{ saudacao}} &nbsp; {{ usuario}} </h1>
+          <h1 class="branco">{{ saudacao}} &nbsp; {{ usuario}}</h1>
         </div>
       </ion-col>
       <ion-col col-2>
@@ -32,7 +32,7 @@
     <ion-label>
       <ion-row style="height: 65px">
         <ion-col col-2 style="margin-left: 10px">
-          <h1 style="font-weight: bold;" >Saldo Geral</h1>
+          <h1 style="font-weight: bold">Saldo Geral</h1>
           <h1
             style="
               color: #3c79e0;
@@ -82,56 +82,67 @@
           <table>
             <tr>
               <td>
-                <ion-card>
-                  <ion-card-content>
-                    <ion-icon
-                      class="icon-grande"
-                      slot="end"
-                      name="wallet-outline"
-                    >
-                    </ion-icon
-                    ><br />
-                    <ion-label style="font-size: small"
-                      >Minhas Contas</ion-label
-                    >
-                  </ion-card-content>
-                </ion-card>
+                <a style="color: transparent" href="/contas">
+                  <ion-card>
+                    <ion-card-content>
+                      <ion-icon
+                        style="color: #3c79e0"
+                        class="icon-grande"
+                        slot="end"
+                        name="wallet-outline"
+                      >
+                      </ion-icon
+                      ><br />
+                      <ion-label style="font-size: small"
+                        >Minhas Contas</ion-label
+                      >
+                    </ion-card-content>
+                  </ion-card>
+                </a>
               </td>
               <td>
-                <ion-card>
-                  <ion-card-content>
-                    <ion-icon class="icon-grande" slot="end" name="card">
-                    </ion-icon
-                    ><br />
-                    <ion-label style="font-size: small">Meus Cartões</ion-label>
-                  </ion-card-content>
-                </ion-card>
+                <a style="color: transparent" href="/cartoes">
+                  <ion-card>
+                    <ion-card-content>
+                      <ion-icon style="color: #3c79e0" class="icon-grande" slot="end" name="card">
+                      </ion-icon
+                      ><br />
+                      <ion-label style="font-size: small"
+                        >Meus Cartões</ion-label
+                      >
+                    </ion-card-content>
+                  </ion-card>
+                </a>
               </td>
             </tr>
             <tr>
               <td>
-                <ion-card>
-                  <ion-card-content>
-                    <ion-icon class="icon-grande" slot="end" name="bag">
-                    </ion-icon
-                    ><br />
-                    <ion-label style="font-size: small"
-                      >Receitas e Despesas</ion-label
-                    >
-                  </ion-card-content>
-                </ion-card>
+                <a style="color: transparent" href="/categorias">
+                  <ion-card>
+                    <ion-card-content>
+                      <ion-icon style="color: #3c79e0" class="icon-grande" slot="end" name="bag">
+                      </ion-icon
+                      ><br />
+                      <ion-label style="font-size: small"
+                        >Receitas e Despesas</ion-label
+                      >
+                    </ion-card-content>
+                  </ion-card>
+                </a>
               </td>
               <td>
-                <ion-card>
-                  <ion-card-content>
-                    <ion-icon class="icon-grande" slot="end" name="warning">
-                    </ion-icon
-                    ><br />
-                    <ion-label style="font-size: small"
-                      >Limites de Gastos</ion-label
-                    >
-                  </ion-card-content>
-                </ion-card>
+                <a style="color: transparent" href="/limites">
+                  <ion-card>
+                    <ion-card-content>
+                      <ion-icon style="color: #3c79e0" class="icon-grande" slot="end" name="warning">
+                      </ion-icon
+                      ><br />
+                      <ion-label style="font-size: small"
+                        >Limites de Gastos</ion-label
+                      >
+                    </ion-card-content>
+                  </ion-card>
+                </a>
               </td>
             </tr>
           </table>
@@ -191,7 +202,11 @@
               <div class="divider"></div>
 
               <ion-col size="12">
-                <h6>Mais detalhes</h6>
+                <a href="/lancamentos"
+                  ><ion-button style="text-transform: none"
+                    >Mais detalhes</ion-button
+                  ></a
+                >
               </ion-col>
             </ion-row>
           </ion-grid>
@@ -265,7 +280,11 @@
               <div class="divider"></div>
 
               <ion-col size="12">
-                <h6>Ver todos os lançamentos</h6>
+                <a href="/lancamentos"
+                  ><ion-button style="text-transform: none"
+                    >Todos os lançamentos</ion-button
+                  ></a
+                >
               </ion-col>
             </ion-row>
           </ion-grid>

@@ -1,3 +1,4 @@
+/* eslint-disable @angular-eslint/use-lifecycle-interface */
 import { Router } from '@angular/router';
 /* eslint-disable eqeqeq */
 /* eslint-disable prefer-const */

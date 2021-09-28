@@ -12,7 +12,6 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import { AlertaService } from '../servicos/alerta.service';
 
-
 @Component({
   selector: 'app-despesas',
   templateUrl: './despesas.page.html',
@@ -25,9 +24,7 @@ export class DespesasPage implements OnInit {
   constructor(
     private http: HttpClient,
     private alerta: AlertaService
-  ) {
-
-  }
+  ) { }
 
   carregarItems(tipo, parametro) {
     this.http.get(environment.api + '/' + 'ListaDespesa/' + tipo + '/' + parametro)
@@ -50,7 +47,7 @@ export class DespesasPage implements OnInit {
     }
   }
 
-  excluiDespesa(id) {
+  excluiConta(id) {
     this.alerta.confirmacao('Confirmação', 'Confirma a exclusão dessa despesa?', 'Cancelar', 'OK').then((res) => {
       if (res === 'ok') {
         this.http.get(environment.api + '/' + 'ExcluiDespesa/' + id).subscribe(dados => {
