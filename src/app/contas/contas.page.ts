@@ -15,9 +15,7 @@ export class ContasPage implements OnInit {
   constructor(
     private http: HttpClient,
     private alerta: AlertaService
-  ) {
-
-  }
+  ) { }
 
   carregarItems(tipo, parametro) {
     this.http.get(environment.api + '/' + 'ListaConta/' + tipo + '/' + parametro)
@@ -46,8 +44,8 @@ export class ContasPage implements OnInit {
         this.http.get(environment.api + '/' + 'ExcluiConta/' + id).subscribe(dados => {
           this.carregarItems('a', '0');
         });
-        (document.getElementById('searchbar-conta') as HTMLInputElement).value = 'x';
-        (document.getElementById('searchbar-conta') as HTMLInputElement).value = '';
+        (document.getElementById('searchbar-categoria') as HTMLInputElement).value = 'x';
+        (document.getElementById('searchbar-categoria') as HTMLInputElement).value = '';
       }
     });
   }

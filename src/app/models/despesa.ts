@@ -5,5 +5,5 @@ export interface Despesa {
   datainicio: Date;
   datafim: Date;
   valor: number;
-  idloc: number | null;
+  idusu: number | null;
 }

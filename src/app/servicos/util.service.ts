@@ -1,3 +1,5 @@
+/* eslint-disable eqeqeq */
+/* eslint-disable prefer-const */
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -27,31 +29,67 @@ export class UtilService {
     return chave.slice(chave.indexOf(':') + 1, chave.length).replace(/'/g, '');
   }
 
-  emailValido(email: string) {
-    let validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-    return email.match(validRegex);
+  ajustaValor(currency, valor) {
+    if (currency) {
+      // valor = valor.replace(',','*');
+      // valor = valor.replace(',','.');
+      // valor = valor.replace('*',',');
+    }
+    else {
+      if ((valor.indexOf('.') !== 0) && (valor.indexOf(',') <= 0)) {
+        valor = valor.trim();
+      }
+      else {
+        if ((valor.indexOf('.') !== 0) && (valor.indexOf(',') !== 0)) {
+          valor = valor.replace('.', 'z');
+          valor = valor.replace('.', 'z');
+          valor = valor.replace('.', 'z');
+          valor = valor.replace('.', 'z');
+          valor = valor.replace('.', 'z');
+          valor = valor.replace('.', 'z');
+          valor = valor.replace(',','.');
+          valor = valor.replace(/z/g, '');
+        }
+        else {
+          if ((valor.indexOf('.') <= 0) && (valor.indexOf(',') != 0)) {
+            valor = valor.replace(/,/g, '.');
+          }
+          else {
+            // if ((valor.indexOf('.') <= 0) && (valor.indexOf(',') != 0)) {
+            //   valor = valor.replace(',','.');
+          }
+        }
+      }
+      return valor;
+    }
   }
 
-  getValorJson(objeto, chave) {
-    let valorChave = null;
-    // eslint-disable-next-line @typescript-eslint/prefer-for-of
-    for (let i = 0; i < objeto.length; i++) {
-      if (objeto[i].toString().indexOf(chave) !== -1) {
-        valorChave = this.ajustaJson(objeto[i]);
-        break;
+    emailValido(email: string) {
+      // eslint-disable-next-line prefer-const
+      let validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+      return email.match(validRegex);
+    }
+
+    getValorJson(objeto, chave) {
+      let valorChave = null;
+      // eslint-disable-next-line @typescript-eslint/prefer-for-of
+      for (let i = 0; i < objeto.length; i++) {
+        if (objeto[i].toString().indexOf(chave) !== -1) {
+          valorChave = this.ajustaJson(objeto[i]);
+          break;
+        }
+      }
+      return valorChave;
+    }
+
+    limpaInput() {
+      let elementos = document.getElementsByTagName('input');
+      for (let i = 0, max = elementos.length; i < max; i++) {
+        elementos[i].value = '';
       }
     }
-    return valorChave;
-  }
 
-  limpaInput() {
-    let elementos = document.getElementsByTagName('input');
-    for (let i = 0, max = elementos.length; i < max; i++) {
-      elementos[i].value = '';
+    setValorInput(input, valor) {
+      (document.getElementById(input) as HTMLInputElement).value = valor;
     }
   }
-
-  setValorInput(input, valor) {
-    (document.getElementById(input) as HTMLInputElement).value = valor;
-  }
-}

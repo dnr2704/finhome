@@ -8,7 +8,7 @@
         <ion-icon name="add-circle"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>Minhas Contas</ion-title>
+    <ion-title>Categorias</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -20,20 +20,20 @@
     ></ion-icon>
   </div>
   <ion-searchbar
-    id="searchbar-conta"
+    id="searchbar-categoria"
     type="text"
     placeholder="Buscar"
     (ionChange)="busca($event)"
   ></ion-searchbar>
 
-  <div *ngIf="itens.length >= 0">
+  <!-- <div *ngIf="itens.length >= 0">
     <ion-list *ngFor="let item of itens; let i = index">
       <ion-item-sliding>
-        <ion-item [routerLink]="['/' + 'conta/' + item.id]">
+        <ion-item [routerLink]="['/' + 'categoria/' + item.id]">
           <ion-label>
             <h2>{{item.nome}}</h2>
             <h3>
-              Tipo: {{item.tipo === 'C' ? 'Conta Corrente' : 'Conta Poupança' }}
+              Tipo: {{item.tipo === 'D' ? 'Despesa' : 'Receita' }}
             </h3>
             <h3>Saldo: {{item.saldo | currency:'BRL'  }}</h3>
 
@@ -43,7 +43,7 @@
 
         <ion-item-options side="end">
           <ion-item-option
-            (click)="excluiConta(item.id)"
+            (click)="excluiCategoria(item.id)"
             style="text-transform: none"
             color="danger"
             >Excluir</ion-item-option
@@ -57,6 +57,6 @@
     *ngIf="((itens.length < 1))"
     style="padding-left: 10px; padding-right: 10px"
   >
-    Nenhuma conta cadastrada.
-  </p>
+    Nenhuma categoria cadastrada.
+  </p> -->
 </ion-content>

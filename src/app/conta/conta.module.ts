@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { ContaPageRoutingModule } from './conta-routing.module';
-
+import { NgxMaskModule, IConfig, MaskPipe } from 'ngx-mask';
 import { ContaPage } from './conta.page';
 
 @NgModule({
@@ -13,6 +13,7 @@ import { ContaPage } from './conta.page';
     CommonModule,
     FormsModule,
     IonicModule,
+    NgxMaskModule,
     ContaPageRoutingModule
   ],
   declarations: [ContaPage]
