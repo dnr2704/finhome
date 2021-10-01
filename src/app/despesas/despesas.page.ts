@@ -47,7 +47,7 @@ export class DespesasPage implements OnInit {
     }
   }
 
-  excluiConta(id) {
+  excluiDespesa(id) {
     this.alerta.confirmacao('Confirmação', 'Confirma a exclusão dessa despesa?', 'Cancelar', 'OK').then((res) => {
       if (res === 'ok') {
         this.http.get(environment.api + '/' + 'ExcluiDespesa/' + id).subscribe(dados => {

@@ -1,3 +1,5 @@
+import { TabscatPage } from './categorias/tabscat/tabscat.page';
+
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
@@ -61,8 +63,20 @@ const routes: Routes = [
     loadChildren: () => import('./conta/conta.module').then( m => m.ContaPageModule)
   },
   {
+    path: 'tabreceita',
+    loadChildren: () => import('./categorias/tabreceita/tabreceita.module').then( m => m.TabreceitaPageModule)
+  },
+  {
+    path: 'tabdespesa',
+    loadChildren: () => import('./categorias/tabdespesa/tabdespesa.module').then( m => m.TabdespesaPageModule)
+  },
+  {
     path: 'categorias',
-    loadChildren: () => import('./categorias/categorias.module').then( m => m.CategoriasPageModule)
+    loadChildren: () => import('./categorias/tabscat/tabscat.module').then( m => m.TabscatPageModule)
+  },
+  {
+    path: 'categoria/:id/:tipo',
+    loadChildren: () => import('./categorias/categoria/categoria.module').then( m => m.CategoriaPageModule)
   }
 ];
 @NgModule({

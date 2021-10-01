@@ -1,0 +1,32 @@
+<ion-searchbar style="background-color: white;"
+id="sbar-catreceita"
+  type="text"
+  placeholder="Buscar"
+  (ionChange)="busca($event)"
+></ion-searchbar>
+
+<ion-content padding>
+  <div style="padding-left: 1px; padding-right: 1px;">
+    <div *ngIf="itens.length > 0">
+      <ion-list *ngFor="let item of itens; let i = index">
+        <ion-item-sliding>
+          <ion-item [routerLink]="['/' + 'categoria/' + item.id + '/' + item.tipo]">
+            <ion-label>
+              <h2>{{item.descricao}}</h2>
+            </ion-label>
+          </ion-item>
+
+          <ion-item-options side="end">
+            <ion-item-option
+              (click)="excluiCategoria(item.id)"
+              style="text-transform: none"
+              color="danger"
+              >Excluir</ion-item-option
+            >
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+    </div>
+  </div>
+  <p style="padding-left: 10px;" *ngIf="itens.length < 1" >Nenhuma receita encontrada.</p>
+</ion-content>

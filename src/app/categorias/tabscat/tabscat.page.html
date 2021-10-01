@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Receitas e Despesas</ion-title>
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/categoria/0/' + tipoCategoria]">
+        <ion-icon name="add-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<!-- <div style="text-align: center; background-color: white;">
+  <ion-icon
+    style="height: 90px; width: 90px; margin-top: 20px; color: #d4d4d4"
+    name="business"
+  ></ion-icon>
+</div> -->
+
+<input id="tipoCategoria" name="tipoCategoria" type="hidden" />
+<ion-content>
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button
+        (click)="tipoCategoria ='R'"
+        onclick="document.getElementById('tipoCategoria').value = 'R'"
+        tab="tabreceita"
+      >
+        <ion-icon name="arrow-down-outline"></ion-icon>
+        <ion-label>Receitas</ion-label>
+        <!-- <ion-badge>0</ion-badge> -->
+      </ion-tab-button>
+
+      <ion-tab-button
+        (click)="tipoCategoria ='D'"
+        onclick="document.getElementById('tipoCategoria').value = 'D'"
+        tab="tabdespesa"
+      >
+        <ion-icon name="arrow-up-outline"></ion-icon>
+        <ion-label>Despesas</ion-label>
+        <!-- <ion-badge>1</ion-badge> -->
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-content>
