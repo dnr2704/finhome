@@ -77,6 +77,14 @@ const routes: Routes = [
   {
     path: 'categoria/:id/:tipo',
     loadChildren: () => import('./categorias/categoria/categoria.module').then( m => m.CategoriaPageModule)
+  },
+  {
+    path: 'limites',
+    loadChildren: () => import('./limites/limites.module').then( m => m.LimitesPageModule)
+  },
+  {
+    path: 'limite/:id',
+    loadChildren: () => import('./limite/limite.module').then( m => m.LimitePageModule)
   }
 ];
 @NgModule({

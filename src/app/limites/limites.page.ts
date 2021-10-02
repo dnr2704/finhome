@@ -1,15 +1,17 @@
+/* eslint-disable eol-last */
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { AlertaService } from '../servicos/alerta.service';
 import { StorageService } from '../servicos/storage.service';
+import * as $ from 'jquery';
 
 @Component({
-  selector: 'app-contas',
-  templateUrl: './contas.page.html',
-  styleUrls: ['./contas.page.scss'],
+  selector: 'app-limites',
+  templateUrl: './limites.page.html',
+  styleUrls: ['./limites.page.scss'],
 })
-export class ContasPage implements OnInit {
+export class LimitesPage implements OnInit {
 
   itens = [];
 
@@ -20,7 +22,7 @@ export class ContasPage implements OnInit {
   ) { }
 
   carregarItems(tipo, idusu, parametro) {
-    this.http.get(environment.api + '/' + 'ListaConta/' + tipo + '/' + idusu + '/' + parametro)
+    this.http.get(environment.api + '/' + 'ListaLimite/' + tipo + '/' + idusu + '/' + parametro)
       .subscribe(data => {
         this.itens = JSON.parse(JSON.stringify(data));
       });
@@ -33,21 +35,21 @@ export class ContasPage implements OnInit {
   busca(ev: any) {
     const parametro = ev.target.value;
     if (parametro && parametro.trim() !== '') {
-      this.carregarItems('instituicao', this.storage.get('idusu'), parametro);
+      this.carregarItems('descricao', this.storage.get('idusu'), parametro);
     }
     else {
       this.carregarItems('idusu', this.storage.get('idusu'), '0');
     }
   }
 
-  excluiConta(id) {
-    this.alerta.confirmacao('Confirmação', 'Confirma a exclusão dessa conta?', 'Cancelar', 'OK').then((res) => {
+  excluiLimite(id) {
+    this.alerta.confirmacao('Confirmação', 'Confirma a exclusão desse limte de gastos ?', 'Cancelar', 'OK').then((res) => {
       if (res === 'ok') {
-        this.http.get(environment.api + '/' + 'ExcluiConta/' + id).subscribe(dados => {
+        this.http.get(environment.api + '/' + 'ExcluiLimite/' + id).subscribe(dados => {
           this.carregarItems('idusu', this.storage.get('idusu'), '0');
         });
-        (document.getElementById('searchbar-categoria') as HTMLInputElement).value = 'x';
-        (document.getElementById('searchbar-categoria') as HTMLInputElement).value = '';
+        $('#sblimite').val('x');
+        $('#sblimite').val('');
       }
     });
   }

@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/limite/0']">
+        <ion-icon name="add-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Limites de Gastos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div style="text-align: center">
+    <ion-icon
+      style="height: 90px; width: 90px; margin-top: 20px; color: #d4d4d4"
+      name="business"
+    ></ion-icon>
+  </div>
+  <ion-searchbar
+    id="sblimite"
+    type="text"
+    placeholder="Buscar"
+    (ionChange)="busca($event)"
+  ></ion-searchbar>
+
+  <div *ngIf="itens.length >= 0">
+    <ion-list *ngFor="let item of itens; let i = index">
+      <ion-item-sliding>
+        <ion-item [routerLink]="['/' + 'limite/' + item.id]">
+          <ion-label>
+            <h2>{{item.descricao}}</h2>
+            <h3>Limite: {{item.valor | currency:'BRL'  }}</h3>
+            <h3>Valor gasto: {{item.valor-50 | currency:'BRL'  }}</h3>
+            <!-- <h3>Instituição: {{item.instituicao}}</h3> -->
+            <ion-progress-bar style="margin-top: 10px;" color="danger" value="0.5"></ion-progress-bar>
+          </ion-label>
+        </ion-item>
+
+        <ion-item-options side="end">
+          <ion-item-option
+            (click)="excluiLimite(item.id)"
+            style="text-transform: none"
+            color="danger"
+            >Excluir</ion-item-option
+          >
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  </div>
+
+  <p
+    *ngIf="((itens.length < 1))"
+    style="padding-left: 10px; padding-right: 10px"
+  >
+    Nenhuma conta cadastrada.
+  </p>
+</ion-content>

@@ -10,6 +10,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Usuario } from '../models/usuario';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { StorageService } from '../servicos/storage.service';
 
 @Component({
   selector: 'app-login',
@@ -42,6 +43,7 @@ export class LoginPage implements OnInit {
     private validacao: ValidacaoService,
     private util: UtilService,
     private toast: ToastService,
+    private storage: StorageService,
     private rota: Router) { }
 
   ngOnInit() {
@@ -54,6 +56,7 @@ export class LoginPage implements OnInit {
     if ((this.email.trim() === '') || (this.senha.trim() === ''))
     {
        this.toast.showToast('Informe o seu e-mail e a sua senha.',2000);
+       // eslint-disable-next-line prefer-const
        let foco = this.email.trim() === '' ? 'email' : 'senha';
        document.getElementById(foco).focus();
     }
@@ -69,8 +72,10 @@ export class LoginPage implements OnInit {
         this.msgErro = '';
         try {
           this.validacao.validaAcessoUsuario(this.email, this.senha).subscribe(dados => {
-            if (dados.length != 0) // mudar para diferente de zero
+            if (dados.length != 0)
             {
+              this.storage.set('idusu', dados[0].id);
+              this.storage.set('email', dados[0].email);
               this.rota.navigateByUrl('/tabs/tab2');
             }
             else {
