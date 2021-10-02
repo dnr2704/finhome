@@ -7,11 +7,11 @@ import { StorageService } from '../servicos/storage.service';
 import * as $ from 'jquery';
 
 @Component({
-  selector: 'app-limites',
-  templateUrl: './limites.page.html',
-  styleUrls: ['./limites.page.scss'],
+  selector: 'app-cartoes',
+  templateUrl: './cartoes.page.html',
+  styleUrls: ['./cartoes.page.scss'],
 })
-export class LimitesPage implements OnInit {
+export class CartoesPage implements OnInit {
 
   itens = [];
 
@@ -22,7 +22,7 @@ export class LimitesPage implements OnInit {
   ) { }
 
   carregarItems(tipo, idusu, parametro) {
-    this.http.get(environment.api + '/' + 'ListaLimite/' + tipo + '/' + idusu + '/' + parametro)
+    this.http.get(environment.api + '/' + 'ListaCartao/' + tipo + '/' + idusu + '/' + parametro)
       .subscribe(data => {
         this.itens = JSON.parse(JSON.stringify(data));
       });
@@ -42,14 +42,14 @@ export class LimitesPage implements OnInit {
     }
   }
 
-  excluiLimite(id) {
-    this.alerta.confirmacao('Confirmação', 'Confirma a exclusão desse limite de gastos ?', 'Cancelar', 'OK').then((res) => {
+  excluiCartao(id) {
+    this.alerta.confirmacao('Confirmação', 'Confirma a exclusão desse cartão ?', 'Cancelar', 'OK').then((res) => {
       if (res === 'ok') {
-        this.http.get(environment.api + '/' + 'ExcluiLimite/' + id).subscribe(dados => {
+        this.http.get(environment.api + '/' + 'ExcluiCartao/' + id).subscribe(dados => {
           this.carregarItems('idusu', this.storage.get('idusu'), '0');
         });
-        $('#sblimite').val('x');
-        $('#sblimite').val('');
+        $('#sbcartao').val('x');
+        $('#sbcartao').val('');
       }
     });
   }

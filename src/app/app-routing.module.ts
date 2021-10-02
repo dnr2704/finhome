@@ -85,6 +85,14 @@ const routes: Routes = [
   {
     path: 'limite/:id',
     loadChildren: () => import('./limite/limite.module').then( m => m.LimitePageModule)
+  },
+  {
+    path: 'cartoes',
+    loadChildren: () => import('./cartoes/cartoes.module').then( m => m.CartoesPageModule)
+  },
+  {
+    path: 'cartao/:id',
+    loadChildren: () => import('./cartao/cartao.module').then( m => m.CartaoPageModule)
   }
 ];
 @NgModule({
