@@ -1,0 +1,155 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Novo Lançamento</ion-title>
+    <ion-buttons slot="end">
+      <ion-button style="text-transform: none" (click)="closeModal()"
+        >Fechar</ion-button
+      >
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-segment value="despesa">
+    <ion-segment-button (click)="changeColor('D')" value="despesa">
+      <ion-label>Despesa</ion-label>
+    </ion-segment-button>
+    <ion-segment-button (click)="changeColor('R')" value="receita">
+      <ion-label>Receita</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  <div
+    id="divcolor"
+    style="background-color: #f28080; height: 80px; outline: none"
+  >
+  <input
+      class="recdep"
+      style="
+        width: 88%;
+        margin: 20px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border: none;
+        height: 40px;
+        font-size: 25px;
+      "
+      mask="separator.2"
+      [thousandSeparator]="'.'"
+      [decimalMarker]="','"
+      prefix="R$ "
+      type="text"
+      id="valor"
+      placeholder="R$0,00"
+      type="text"
+    />
+  </div>
+  <br />
+
+  <form action="action_page.php">
+    <div style="background-color: white" class="container">
+
+      <label for="data"><b>Data</b></label>
+      <input
+        type="date"
+        placeholder="Data"
+        name="Data do lançamento"
+        maxlength="100"
+        id="data"
+        required
+      />
+
+      <label for="descricao"><b>Descrição</b></label>
+      <input
+        type="text"
+        placeholder="Descrição"
+        name="Descrição do lançamento"
+        maxlength="100"
+        id="descricao"
+        required
+      />
+
+      <label id="lbdesprec" for="slcategoria"><b>Despesa</b></label>
+      <select id="slcategoria"></select>
+
+      <label for="slformapagto"><b>Pagar com</b></label>
+      <select (change)="permiteParcelar()" id="slformapagto"></select>
+
+
+      <br>
+
+      <table>
+        <tr>
+          <td>
+            <label for="slparcela"><b>Parcelar em</b></label><br>
+            <select style="width: 100%;" id="slparcela">
+              <option id="p01" value="p01">01 parcela</option>
+              <option id="p02" value="p02">02 parcelas</option>
+              <option id="p03" value="p03">03 parcelas</option>
+              <option id="p04" value="p04">04 parcelas</option>
+              <option id="p05" value="p05">05 parcelas</option>
+              <option id="p06" value="p06">06 parcelas</option>
+              <option id="p07" value="p07">07 parcelas</option>
+              <option id="p08" value="p08">08 parcelas</option>
+              <option id="p09" value="p09">09 parcelas</option>
+              <option id="p10" value="p10">10 parcelas</option>
+              <option id="p11" value="p11">11 parcelas</option>
+              <option id="p12" value="p12">12 parcelas</option>
+            </select>
+          </td>
+          <td>
+            <table>
+              <tr>
+                <td>
+                  <!-- <ion-checkbox style="margin-left: 10px" id="chkfaturaAtual"></ion-checkbox> -->
+                  <input style="margin-left: 10px; height: 18px; width: 18px;" id="chkfaturaAtual" type="checkbox">
+                </td>
+                <td>
+                  <label id="lbfaturaAtual" class="disabled" style="margin-left: 10px;" for="slparcela"><b>Fatura Atual</b></label>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+
+      <table>
+        <tr>
+          <td>
+            <!-- <ion-checkbox id="chkminhadespesa" checked (click)="adicionaPagador()" >0000</ion-checkbox> -->
+            <input (click)="adicionaPagador()" checked style="height: 18px; width: 18px;" id="chkminhadespesa" type="checkbox">
+          </td>
+          <td>
+            <label style="margin-left: 10px;" for="slparcela"><b>Minha despesa</b></label>
+          </td>
+        </tr>
+      </table>
+
+
+      <select id="slusuario">
+        <option></option>
+      </select>
+
+      <label for="observacoes"><b>Observações</b></label>
+      <input
+        style="word-wrap: break-word; word-break: break-all"
+        type="text"
+        placeholder="Observações"
+        name="Observações"
+        id="observacoes"
+      />
+
+      <hr />
+
+      <!-- <p>
+        By creating an account you agree to our <a href="#">Terms & Privacy</a>.
+      </p> -->
+      <button type="submit" (click)="salvar()" class="registerbtn">
+        Salvar
+      </button>
+    </div>
+
+    <!-- <div class="container signin">
+      <p>Already have an account? <a href="#">Sign in</a>.</p>
+    </div> -->
+  </form>
+</ion-content>

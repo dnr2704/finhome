@@ -10,6 +10,7 @@ import { NgxMaskModule, IConfig } from 'ngx-mask';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { LancamentoPage } from './lancamento/lancamento.page';
 
 import { LOCALE_ID } from '@angular/core';
 import localePt from '@angular/common/locales/pt';
@@ -29,6 +30,7 @@ const maskConfig: Partial<IConfig> = {
   imports: [
     FormsModule,
     ReactiveFormsModule,
+    //LancamentoPageModule
     NgxMaskModule.forRoot(maskConfig),
     BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
   providers: [

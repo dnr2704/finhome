@@ -65,7 +65,8 @@ export class CartaoPage implements OnInit {
       let limite = (document.getElementById('limite') as HTMLInputElement).value.replace('R$', '').trim();
       limite = this.util.ajustaValor(false, limite);
       let vencedia = (document.getElementById('vencedia') as HTMLInputElement).value;
-      let fechadia = (document.getElementById('fechadia') as HTMLInputElement).value;
+      // let fechadia = (document.getElementById('fechadia') as HTMLInputElement).value;
+      let fechadia = '0';
       if (parseInt(vencedia, 10) > 31) {
         this.toast.showToast('O dia de vencimento informado é inválido.', 2000);
       }

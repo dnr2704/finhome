@@ -41,22 +41,24 @@ export class ContaPage implements OnInit {
 
     this.id = this.rota.url.replace('/conta/', '');
     this.util.limpaInput();
-    this.http.get<Conta[]>(environment.api + '/' + 'ListaConta/id/' + this.id).subscribe(dados => {
-      this.util.setValorInput('codigo', dados[0].codigo);
-      this.util.setValorInput('nome', dados[0].nome);
-      this.util.setValorInput('instituicao', dados[0].instituicao);
-      let posicao = dados[0].tipo === 'C' ? '0' : '1';
-      $('#sltipoconta').val($('#sltipoconta option:eq(' + posicao + ')').val());
-      this.util.setValorInput('observacoes', dados[0].observacoes);
-      this.util.setValorInput('saldo', 'R$ ' + dados[0].saldo);
-    });
+    if (this.id !== 0) {
+      this.http.get<Conta[]>(environment.api + '/' + 'ListaConta/id/0/' + this.id).subscribe(dados => {
+        this.util.setValorInput('codigo', dados[0].codigo);
+        this.util.setValorInput('nome', dados[0].nome);
+        this.util.setValorInput('instituicao', dados[0].instituicao);
+        let posicao = dados[0].tipo === 'C' ? '0' : '1';
+        $('#sltipoconta').val($('#sltipoconta option:eq(' + posicao + ')').val());
+        this.util.setValorInput('observacoes', dados[0].observacoes);
+        this.util.setValorInput('saldo', 'R$ ' + dados[0].saldo);
+      });
+    }
   }
 
   salvar() {
     if (this.validacao.verificaObrigatorio() === true) {
       let email = this.store.get('email');
       let saldo = (document.getElementById('saldo') as HTMLInputElement).value.replace('R$', '').trim();
-      saldo = this.util.ajustaValor(false,saldo);
+      saldo = this.util.ajustaValor(false, saldo);
       this.http.get<Usuario[]>(environment.api + '/' + 'ExisteUsuario/' + email + '/0').subscribe(dados => {
         let jsonDados = JSON.parse(JSON.stringify({
           id: this.id,
@@ -71,8 +73,8 @@ export class ContaPage implements OnInit {
         this.http.post<Conta[]>(environment.api + '/' + 'SalvaConta/', jsonDados).subscribe();
         this.toast.showToast(this.id == 0 ? 'Dados cadastrados com sucesso.' : 'Dados atualizados com sucesso.', 3000);
         this.rota.navigateByUrl('/contas');
-        (document.getElementById('searchbar-conta') as HTMLInputElement).value = 'x';
-        (document.getElementById('searchbar-conta') as HTMLInputElement).value = '';
+        $('#sbconta').val('x');
+        $('#sbconta').val('');
       });
     }
   }

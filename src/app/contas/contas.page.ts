@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { AlertaService } from '../servicos/alerta.service';
 import { StorageService } from '../servicos/storage.service';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-contas',
@@ -46,8 +47,8 @@ export class ContasPage implements OnInit {
         this.http.get(environment.api + '/' + 'ExcluiConta/' + id).subscribe(dados => {
           this.carregarItems('idusu', this.storage.get('idusu'), '0');
         });
-        (document.getElementById('searchbar-categoria') as HTMLInputElement).value = 'x';
-        (document.getElementById('searchbar-categoria') as HTMLInputElement).value = '';
+        $('#sbconta').val('x');
+        $('#sbconta').val('');
       }
     });
   }

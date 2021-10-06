@@ -93,6 +93,10 @@ const routes: Routes = [
   {
     path: 'cartao/:id',
     loadChildren: () => import('./cartao/cartao.module').then( m => m.CartaoPageModule)
+  },
+  {
+    path: 'lancamento',
+    loadChildren: () => import('./lancamento/lancamento.module').then( m => m.LancamentoPageModule)
   }
 ];
 @NgModule({
