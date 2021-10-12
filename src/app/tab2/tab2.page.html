@@ -33,7 +33,7 @@
       <ion-row style="height: 65px">
         <ion-col col-2 style="margin-left: 10px">
           <h1 style="font-weight: bold">Saldo Geral</h1>
-          <h1
+          <h1 id="h1saldo"
             style="
               color: #3c79e0;
               font-size: 20px;
@@ -41,15 +41,16 @@
               margin-top: 10px;
             "
           >
-            R$0,00
+            <span *ngIf="mostrarValor" >{{saldoUsuario}}</span>
+            <span *ngIf="!mostrarValor" >R$-,--</span>
           </h1>
         </ion-col>
         <ion-col col-2>
           <div style="text-align: right; margin-right: 10px">
             <ion-card-subtitle style="font-size: large"
-              >Exibir valor</ion-card-subtitle
+              >Exibir valores</ion-card-subtitle
             >
-            <ion-toggle slot="start" name="blueberry" checked></ion-toggle>
+            <ion-toggle id="tgvalor" [(ngModel)]="mostrarValor" (ionChange)="mostraValores()" [checked]="mostrarValor" slot="start" name="blueberry"></ion-toggle>
           </div>
         </ion-col>
       </ion-row>
@@ -168,7 +169,8 @@
                 <h6 style="color: green">Entradas</h6>
               </ion-col>
               <ion-col size="8">
-                <h6>R$0,00</h6>
+                <h6 *ngIf="mostrarValor" >R$0,00</h6>
+                <h6 *ngIf="!mostrarValor" >R$-,--</h6>
               </ion-col>
               <ion-progress-bar
                 color="success"
@@ -182,7 +184,8 @@
                 <h6 style="color: red">Saídas</h6>
               </ion-col>
               <ion-col size="8">
-                <h6>R$0,00</h6>
+                <h6 *ngIf="mostrarValor" >R$0,00</h6>
+                <h6 *ngIf="!mostrarValor" >R$-,--</h6>
               </ion-col>
               <ion-progress-bar
                 color="danger"
@@ -196,7 +199,8 @@
                 <h6 style="color: #3c79e0">Previsão</h6>
               </ion-col>
               <ion-col size="8">
-                <h6>R$0,00</h6>
+                <h6 *ngIf="mostrarValor" >R$0,00</h6>
+                <h6 *ngIf="!mostrarValor" >R$-,--</h6>
               </ion-col>
 
               <div class="divider"></div>
@@ -230,7 +234,8 @@
                   <ion-label>
                     <h2>20/12/2000</h2>
                     <h3>Aluguel</h3>
-                    <h4 style="color: green">R$700,00</h4>
+                    <h4 *ngIf="mostrarValor"  style="color: green">R$700,00</h4>
+                    <h4 *ngIf="!mostrarValor"  style="color: green">R$-,--</h4>
                   </ion-label>
                 </ion-col>
                 <ion-col size="3">
@@ -247,7 +252,8 @@
                   <ion-label>
                     <h2>20/12/2000</h2>
                     <h3>Bar do Zezeca</h3>
-                    <h4 style="color: red">R$95,00</h4>
+                    <h4 *ngIf="mostrarValor"  style="color: red">R$95,00</h4>
+                    <h4 *ngIf="!mostrarValor"  style="color: red">R$-,--</h4>
                   </ion-label>
                 </ion-col>
                 <ion-col size="3">
@@ -264,7 +270,8 @@
                   <ion-label>
                     <h2>20/12/2000</h2>
                     <h3>Sapataria Máximus</h3>
-                    <h4 style="color: red">R$559,00</h4>
+                    <h4 *ngIf="mostrarValor"  style="color: red">R$559,00</h4>
+                    <h4 *ngIf="!mostrarValor"  style="color: red">R$-,--</h4>
                   </ion-label>
                 </ion-col>
                 <ion-col size="3">

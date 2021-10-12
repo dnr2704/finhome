@@ -11,7 +11,7 @@
 
 <ion-content>
   <ion-segment value="despesa">
-    <ion-segment-button (click)="changeColor('D')" value="despesa">
+    <ion-segment-button (click)="changeColor('D');" value="despesa">
       <ion-label>Despesa</ion-label>
     </ion-segment-button>
     <ion-segment-button (click)="changeColor('R')" value="receita">
@@ -71,7 +71,7 @@
       <label id="lbdesprec" for="slcategoria"><b>Despesa</b></label>
       <select id="slcategoria"></select>
 
-      <label for="slformapagto"><b>Pagar com</b></label>
+      <label id="lbpagarecebe" for="slformapagto"><b>Pagar com</b></label>
       <select (change)="permiteParcelar()" id="slformapagto"></select>
 
 
@@ -119,7 +119,7 @@
             <input (click)="adicionaPagador()" checked style="height: 18px; width: 18px;" id="chkminhadespesa" type="checkbox">
           </td>
           <td>
-            <label style="margin-left: 10px;" for="slparcela"><b>Minha despesa</b></label>
+            <label id="lbminhadespesa" style="margin-left: 10px;"><b>Minha despesa</b></label>
           </td>
         </tr>
       </table>

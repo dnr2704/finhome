@@ -50,7 +50,7 @@ export class LancamentoPage implements OnInit {
   ngOnInit() {
     this.listaCategorias('D');
     $('#slcategoria').append('<option id="0">--Selecione--</option>');
-    this.listaFormasPagamento();
+    this.listaFormasPagamento(true);
     let dataAtual = new Date().toISOString().slice(0, 10);
     $('#data').val(dataAtual);
     this.permiteParcelar();
@@ -62,11 +62,21 @@ export class LancamentoPage implements OnInit {
     let color = tipo === 'D' ? 'f28080' : '90EE90';
     $('#lbdesprec').css('font-weight', 'bold');
     $('#lbdesprec').empty();
+    $('#lbpagarecebe').css('font-weight', 'bold');
+    $('#lbpagarecebe').empty();
     if (tipo === 'D') {
+      $('#lbminhadespesa').removeClass('disabled');
+      $('#chkminhadespesa').prop('disabled', false);
       $('#lbdesprec').append('Despesa');
+      $('#lbpagarecebe').append('Pagar com');
+      this.listaFormasPagamento(true);
     }
     else {
+      $('#lbminhadespesa').addClass('disabled');
+      $('#chkminhadespesa').prop('disabled', true);
       $('#lbdesprec').append('Receita');
+      $('#lbpagarecebe').append('Conta de Recebimento');
+      this.listaFormasPagamento(false);
     }
     this.listaCategorias(tipo);
     $('#divcolor').css('background-color', '#' + color);
@@ -96,16 +106,19 @@ export class LancamentoPage implements OnInit {
       });
   }
 
-  listaFormasPagamento() {
+  listaFormasPagamento(temCartao) {
     $('#slformapagto').empty();
     $('#slformapagto').append('<option id="0" value="0">--Selecione--</option>');
-    this.http.get(environment.api + '/' + 'ListaCartao/idusu' + '/' + this.storage.get('idusu') + '/0')
+    if(temCartao)
+    {
+      this.http.get(environment.api + '/' + 'ListaCartao/idusu' + '/' + this.storage.get('idusu') + '/0')
       .subscribe(data => {
         this.cartoes = JSON.parse(JSON.stringify(data));
         for (var i = 0; i < this.cartoes.length; i++) {
           $('#slformapagto').append('<option id="' + 'CC' + this.cartoes[i].id + '" value=' + 'CC' + this.cartoes[i].id + '>' + this.cartoes[i].descricao + '</option>');
         }
       });
+    }
 
     this.http.get(environment.api + '/' + 'ListaConta/idusu' + '/' + this.storage.get('idusu') + '/0')
       .subscribe(data2 => {
