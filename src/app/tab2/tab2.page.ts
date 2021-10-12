@@ -1,3 +1,8 @@
+import { LimiteMes } from './../models/limiteMes';
+import { Limite } from './../models/limite';
+/* eslint-disable @typescript-eslint/prefer-for-of */
+/* eslint-disable @typescript-eslint/type-annotation-spacing */
+import { ValorMes } from './../models/valorMes';
 import { catchError } from 'rxjs/internal/operators/catchError';
 /* eslint-disable max-len */
 /* eslint-disable @angular-eslint/use-lifecycle-interface */
@@ -14,6 +19,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { stringify } from 'querystring';
 import * as $ from 'jquery';
+import { Lancamento } from '../models/parcelamento';
 
 @Component({
   selector: 'app-tab2',
@@ -25,6 +31,12 @@ export class Tab2Page {
   saudacao: string;
   usuario: string;
   saldoUsuario: string;
+  somaContas: string;
+  somaDespesas: string;
+  somaReceitas: string;
+  valoresMes: [];
+  lancamentos: any;
+  limites: any;
   mostrarValor: boolean = true;
 
   slideOpts: any = {
@@ -37,7 +49,7 @@ export class Tab2Page {
     private storage: StorageService,
     private rota: Router,
     private http: HttpClient
-  ) {}
+  ) { }
 
 
   ngOnInit() {
@@ -63,7 +75,19 @@ export class Tab2Page {
     }
     this.http.get(environment.api + '/' + 'SaldoUsuario/' + `${this.storage.get('idusu')}`).subscribe(retorno => this.saldoUsuario = retorno.toString());
     this.mostrarValor = this.storage.get('mostraValores') == 'S';
+    this.http.get<ValorMes>(environment.api + '/' + 'ValoresMes/' + `${this.storage.get('idusu')}`).subscribe(dados => {
+      this.somaContas = dados[0].somaContas;
+      this.somaDespesas = dados[0].somaDespesas;
+      this.somaReceitas = dados[0].somaReceitas;
+    });
+    this.http.get<Lancamento>(environment.api + '/' + 'LancamentosUsuario/' + `${this.storage.get('idusu')}` + '/' + '5').subscribe(dados => {
+      this.lancamentos = dados;
+    });
+    this.http.get<LimiteMes>(environment.api + '/' + 'LimitesUsuario/' + `${this.storage.get('idusu')}`).subscribe(dados => {
+      this.limites = dados;
+    });
   }
+
 
   mostraValores() {
     //document.getElementById('h1saldo').innerText = this.mostrarValor ? this.saldoUsuario : 'R$-,--';

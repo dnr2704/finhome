@@ -33,7 +33,8 @@
       <ion-row style="height: 65px">
         <ion-col col-2 style="margin-left: 10px">
           <h1 style="font-weight: bold">Saldo Geral</h1>
-          <h1 id="h1saldo"
+          <h1
+            id="h1saldo"
             style="
               color: #3c79e0;
               font-size: 20px;
@@ -41,8 +42,8 @@
               margin-top: 10px;
             "
           >
-            <span *ngIf="mostrarValor" >{{saldoUsuario}}</span>
-            <span *ngIf="!mostrarValor" >R$-,--</span>
+            <span *ngIf="mostrarValor">{{saldoUsuario}}</span>
+            <span *ngIf="!mostrarValor">R$-,--</span>
           </h1>
         </ion-col>
         <ion-col col-2>
@@ -50,7 +51,13 @@
             <ion-card-subtitle style="font-size: large"
               >Exibir valores</ion-card-subtitle
             >
-            <ion-toggle id="tgvalor" [(ngModel)]="mostrarValor" (ionChange)="mostraValores()" [checked]="mostrarValor" slot="start" name="blueberry"></ion-toggle>
+            <ion-toggle
+              [(ngModel)]="mostrarValor"
+              (ionChange)="mostraValores()"
+              [checked]="mostrarValor"
+              slot="start"
+              name="blueberry"
+            ></ion-toggle>
           </div>
         </ion-col>
       </ion-row>
@@ -105,7 +112,12 @@
                 <a style="color: transparent" href="/cartoes">
                   <ion-card>
                     <ion-card-content>
-                      <ion-icon style="color: #3c79e0" class="icon-grande" slot="end" name="card">
+                      <ion-icon
+                        style="color: #3c79e0"
+                        class="icon-grande"
+                        slot="end"
+                        name="card"
+                      >
                       </ion-icon
                       ><br />
                       <ion-label style="font-size: small"
@@ -121,7 +133,12 @@
                 <a style="color: transparent" href="/categorias">
                   <ion-card>
                     <ion-card-content>
-                      <ion-icon style="color: #3c79e0" class="icon-grande" slot="end" name="bag">
+                      <ion-icon
+                        style="color: #3c79e0"
+                        class="icon-grande"
+                        slot="end"
+                        name="bag"
+                      >
                       </ion-icon
                       ><br />
                       <ion-label style="font-size: small"
@@ -135,7 +152,12 @@
                 <a style="color: transparent" href="/limites">
                   <ion-card>
                     <ion-card-content>
-                      <ion-icon style="color: #3c79e0" class="icon-grande" slot="end" name="warning">
+                      <ion-icon
+                        style="color: #3c79e0"
+                        class="icon-grande"
+                        slot="end"
+                        name="warning"
+                      >
                       </ion-icon
                       ><br />
                       <ion-label style="font-size: small"
@@ -169,8 +191,8 @@
                 <h6 style="color: green">Entradas</h6>
               </ion-col>
               <ion-col size="8">
-                <h6 *ngIf="mostrarValor" >R$0,00</h6>
-                <h6 *ngIf="!mostrarValor" >R$-,--</h6>
+                <h6 *ngIf="mostrarValor">{{somaReceitas | currency:'BRL' }}</h6>
+                <h6 *ngIf="!mostrarValor">R$-,--</h6>
               </ion-col>
               <ion-progress-bar
                 color="success"
@@ -184,8 +206,8 @@
                 <h6 style="color: red">Saídas</h6>
               </ion-col>
               <ion-col size="8">
-                <h6 *ngIf="mostrarValor" >R$0,00</h6>
-                <h6 *ngIf="!mostrarValor" >R$-,--</h6>
+                <h6 *ngIf="mostrarValor">{{somaDespesas | currency:'BRL' }}</h6>
+                <h6 *ngIf="!mostrarValor">R$-,--</h6>
               </ion-col>
               <ion-progress-bar
                 color="danger"
@@ -199,8 +221,10 @@
                 <h6 style="color: #3c79e0">Previsão</h6>
               </ion-col>
               <ion-col size="8">
-                <h6 *ngIf="mostrarValor" >R$0,00</h6>
-                <h6 *ngIf="!mostrarValor" >R$-,--</h6>
+                <h6 style="color: #3c79e0" *ngIf="mostrarValor">
+                  {{somaContas | currency:'BRL' }}
+                </h6>
+                <h6 style="color: #3c79e0" *ngIf="!mostrarValor">R$-,--</h6>
               </ion-col>
 
               <div class="divider"></div>
@@ -229,57 +253,35 @@
             </ion-row>
             <div style="width: 100%; height: 173px; overflow-y: scroll">
               <!-- Default Item -->
-              <ion-item>
-                <ion-col size="9">
+              <ion-item *ngFor="let item of lancamentos">
+                <ion-col size="12">
                   <ion-label>
-                    <h2>20/12/2000</h2>
-                    <h3>Aluguel</h3>
-                    <h4 *ngIf="mostrarValor"  style="color: green">R$700,00</h4>
-                    <h4 *ngIf="!mostrarValor"  style="color: green">R$-,--</h4>
+                    <h2>{{item.data | date:'shortDate'}}</h2>
+                    <h3>{{item.descricao | slice:0:28}}</h3>
+                    <table>
+                      <tr>
+                        <td>
+                          <h4 *ngIf="mostrarValor" [ngStyle]="{'color': item.idcat === 1 ? 'green' : 'red'}"> <span>{{item.idcat === 1 ? '(+)' : '(-)'}}
+                          </span> {{item.valor | currency:'BRL'}}
+                       </h4>
+                        </td>
+                        <td>
+                          <ion-icon *ngIf="item.idcar !== null"
+                          name="card-outline"
+                          style="margin-left: 10px; height: 20px; width: 20px; color: #d4d4d4"
+                        ></ion-icon>
+                        </td>
+                      </tr>
+                    </table>
+                    <h4 *ngIf="!mostrarValor" style="color: green">R$-,--</h4>
                   </ion-label>
                 </ion-col>
-                <ion-col size="3">
+                <!-- <ion-col size="3">
                   <ion-icon
                     name="home"
                     style="height: 25px; width: 25px; color: #d4d4d4"
                   ></ion-icon>
-                </ion-col>
-              </ion-item>
-
-              <!-- Default Item -->
-              <ion-item>
-                <ion-col size="9">
-                  <ion-label>
-                    <h2>20/12/2000</h2>
-                    <h3>Bar do Zezeca</h3>
-                    <h4 *ngIf="mostrarValor"  style="color: red">R$95,00</h4>
-                    <h4 *ngIf="!mostrarValor"  style="color: red">R$-,--</h4>
-                  </ion-label>
-                </ion-col>
-                <ion-col size="3">
-                  <ion-icon
-                    name="beer"
-                    style="height: 25px; width: 25px; color: #d4d4d4"
-                  ></ion-icon>
-                </ion-col>
-              </ion-item>
-
-              <!-- Default Item -->
-              <ion-item>
-                <ion-col size="9">
-                  <ion-label>
-                    <h2>20/12/2000</h2>
-                    <h3>Sapataria Máximus</h3>
-                    <h4 *ngIf="mostrarValor"  style="color: red">R$559,00</h4>
-                    <h4 *ngIf="!mostrarValor"  style="color: red">R$-,--</h4>
-                  </ion-label>
-                </ion-col>
-                <ion-col size="3">
-                  <ion-icon
-                    name="footsteps"
-                    style="height: 25px; width: 25px; color: #d4d4d4"
-                  ></ion-icon>
-                </ion-col>
+                </ion-col> -->
               </ion-item>
             </div>
 
@@ -297,6 +299,43 @@
           </ion-grid>
           <br />
         </ion-slide>
+
+        <ion-slide>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="12">
+                <p class="negrito preto" style="font-size: medium">
+                  Limites de gastos no mês
+                </p>
+              </ion-col>
+              <br />
+            </ion-row>
+            <div style="width: 100%; height: 173px; overflow-y: scroll">
+              <!-- Default Item -->
+              <ion-item *ngFor="let item of limites">
+                <ion-col size="12">
+                  <ion-label>
+                    <h2>{{item.data | date:'shortDate'}}</h2>
+                    <h3>{{item.descricao | slice:0:28}}</h3>
+                    <h4 *ngIf="mostrarValor"> Limite: {{item.limiteMensal | currency:'BRL'}}</h4>
+                    <h4 *ngIf="!mostrarValor">Limite: R$-,--</h4>
+                    <h4 *ngIf="mostrarValor"> Valor Gasto: {{item.gastoMensal | currency:'BRL'}}</h4>
+                    <h4 *ngIf="!mostrarValor">Valor Gasto: R$-,--</h4>
+                    <ion-progress-bar style="margin-top: 10px;" color="{{item.percentual >= 1 ? 'danger' : item.percentual <=0.5 ? 'primary' : 'danger' }}" value="{{item.percentual}}"></ion-progress-bar>
+                  </ion-label>
+                </ion-col>
+                <!-- <ion-col size="3">
+                  <ion-icon
+                    name="home"
+                    style="height: 25px; width: 25px; color: #d4d4d4"
+                  ></ion-icon>
+                </ion-col> -->
+              </ion-item>
+            </div>
+          </ion-grid>
+          <br />
+        </ion-slide>
+
       </ion-slides>
     </div>
   </ion-card>
