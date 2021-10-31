@@ -7,6 +7,17 @@ import { Component } from '@angular/core';
 })
 export class Tab3Page {
 
+  ano = new Date().getFullYear();
+
+  slideOpts: any = {
+    initialSlide: 0,
+    speed: 400
+  };
+
   constructor() {}
+
+  alerta(){
+    alert('');
+  }
 
 }

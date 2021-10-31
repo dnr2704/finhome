@@ -1,16 +1,214 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Lançamentos</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" color="light">
+  <div style="height: 5px; width: 100%; background-color: yellow"></div>
+  <div style="margin-left: 15px; margin-right: 15px; padding-bottom: 1px">
+    <table>
+      <tr>
+        <td style="width: 100%">
+          <ion-item>
+            <ion-label>Ano</ion-label>
+            <ion-select value="{{ano}}">
+              <ion-select-option value="2021">2021</ion-select-option>
+              <ion-select-option value="2022">2022</ion-select-option>
+              <ion-select-option value="2023">2023</ion-select-option>
+              <ion-select-option value="2024">2024</ion-select-option>
+              <ion-select-option value="2025">2025</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </td>
+        <td>
+          <ion-button color="warning" style="margin-left: 15px" size="small"
+            ><span style="font-size: smaller">Este mês</span></ion-button
+          >
+        </td>
+      </tr>
+    </table>
 
+    <ion-slides pager="true" [options]="slideOpts">
+      <ion-slide id="ios-1">
+        <div id="divSlide" class="slide">
+          <ion-badge style="margin-top: 10px; margin-bottom: 5px;"  color="primary">Janeiro</ion-badge>
+          <div id="div-1" style="height: 500px; overflow-y: unset; overflow-x: scroll; padding-bottom: 10px; width: 290px">
+            <ion-item>
+              <ion-label>
+                <ion-row>
+                  <ion-col size="9">
+                    <table>
+                      <tr>
+                        <td>
+                          <h6 style="color: teal">20/10/2021 09:50</h6>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><span class="negrito">Padaria</span></td>
+                      </tr>
+                      <tr>
+                        <td><span>Banco do Brasil</span></td>
+                      </tr>
+                    </table>
+                  </ion-col>
+                  <ion-col size="3">
+                    <table style="text-align: right; margin-top:0px">
+                      <td>
+                        <ion-img onclick="alert('')" style="margin-left: 35px;" src="data:image/png;base64,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"></ion-img>
+                      </td>
+                      <tr>
+                        <td><span>R$12,00</span></td>
+                      </tr>
+                      <tr>
+                        <td><span>Pago</span></td>
+                      </tr>
+                    </table>
+                  </ion-col>
+                </ion-row>
+              </ion-label>
+            </ion-item>
+
+
+          </div>
+        </div>
+      </ion-slide>
+
+      <ion-slide id="ios-2">
+        <div class="slide">
+          <ion-badge style="margin-top: 10px; margin-bottom: 5px;"  color="primary">Fevereiro</ion-badge>
+          <div id="div-2" style="padding-bottom: 10px">
+            <p>
+              The <b>ionic conference app</b> is a practical preview of the
+              ionic framework in action, and a demonstration of proper code use.
+            </p>
+          </div>
+        </div>
+      </ion-slide>
+
+      <ion-slide id="ios-3">
+        <div class="slide">
+          <ion-badge style="margin-top: 10px; margin-bottom: 5px;"  color="primary">Março</ion-badge>
+          <div id="div-3" style="padding-bottom: 10px">
+            <p>
+              The <b>ionic conference app</b> is a practical preview of the
+              ionic framework in action, and a demonstration of proper code use.
+            </p>
+          </div>
+        </div>
+      </ion-slide>
+
+      <ion-slide id="ios-4">
+        <div class="slide">
+          <ion-badge style="margin-top: 10px; margin-bottom: 5px;"  color="primary">Abril</ion-badge>
+          <div id="div-4" style="padding-bottom: 10px">
+            <p>
+              The <b>ionic conference app</b> is a practical preview of the
+              ionic framework in action, and a demonstration of proper code use.
+            </p>
+          </div>
+        </div>
+      </ion-slide>
+
+      <ion-slide id="ios-5">
+        <div class="slide">
+          <ion-badge style="margin-top: 10px; margin-bottom: 5px;"  color="primary">Maio</ion-badge>
+          <div id="div-5" style="padding-bottom: 10px">
+            <p>
+              The <b>ionic conference app</b> is a practical preview of the
+              ionic framework in action, and a demonstration of proper code use.
+            </p>
+          </div>
+        </div>
+      </ion-slide>
+
+      <ion-slide id="ios-6">
+        <div class="slide">
+          <ion-badge style="margin-top: 10px; margin-bottom: 5px;"  color="primary">Junho</ion-badge>
+          <div id="div-6" style="padding-bottom: 10px">
+            <p>
+              The <b>ionic conference app</b> is a practical preview of the
+              ionic framework in action, and a demonstration of proper code use.
+            </p>
+          </div>
+        </div>
+      </ion-slide>
+
+      <ion-slide id="ios-7">
+        <div class="slide">
+          <ion-badge style="margin-top: 10px; margin-bottom: 5px;"  color="primary">Julho</ion-badge>
+          <div id="div-7" style="padding-bottom: 10px">
+            <p>
+              The <b>ionic conference app</b> is a practical preview of the
+              ionic framework in action, and a demonstration of proper code use.
+            </p>
+          </div>
+        </div>
+      </ion-slide>
+
+      <ion-slide id="ios-8">
+        <div class="slide">
+          <ion-badge style="margin-top: 10px; margin-bottom: 5px;"  color="primary">Agosto</ion-badge>
+          <div id="div-8" style="padding-bottom: 10px">
+            <p>
+              The <b>ionic conference app</b> is a practical preview of the
+              ionic framework in action, and a demonstration of proper code use.
+            </p>
+          </div>
+        </div>
+      </ion-slide>
+
+      <ion-slide id="ios-9">
+        <div class="slide">
+          <ion-badge style="margin-top: 10px; margin-bottom: 5px;"  color="primary">Setembro</ion-badge>
+          <div id="div-9" style="padding-bottom: 10px">
+            <p>
+              The <b>ionic conference app</b> is a practical preview of the
+              ionic framework in action, and a demonstration of proper code use.
+            </p>
+          </div>
+        </div>
+      </ion-slide>
+
+      <ion-slide id="ios-10">
+        <div class="slide">
+          <ion-badge style="margin-top: 10px; margin-bottom: 5px;"  color="primary">Outubro</ion-badge>
+          <div id="div-10" style="padding-bottom: 10px">
+            <p>
+              The <b>ionic conference app</b> is a practical preview of the
+              ionic framework in action, and a demonstration of proper code use.
+            </p>
+          </div>
+        </div>
+      </ion-slide>
+
+      <ion-slide id="ios-11">
+        <div class="slide">
+          <ion-badge style="margin-top: 10px; margin-bottom: 5px;"  color="primary">Novembro</ion-badge>
+          <div id="div-11" style="padding-bottom: 10px">
+            <p>
+              The <b>ionic conference app</b> is a practical preview of the
+              ionic framework in action, and a demonstration of proper code use.
+            </p>
+          </div>
+        </div>
+      </ion-slide>
+
+      <ion-slide id="ios-12">
+        <div class="slide">
+          <ion-badge style="margin-top: 10px; margin-bottom: 5px;"  color="primary">Dezembro</ion-badge>
+          <div id="div-12" style="padding-bottom: 10px">
+            <p>
+              The <b>ionic conference app</b> is a practical preview of the
+              ionic framework in action, and a demonstration of proper code use.
+            </p>
+          </div>
+        </div>
+      </ion-slide>
+    </ion-slides>
+  </div>
+  <!-- <div class="divider"></div> -->
 </ion-content>
